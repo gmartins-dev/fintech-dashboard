@@ -1,6 +1,7 @@
 import { Portfolio, Asset } from '@/types/api';
 import { Spinner } from '@/components/ui/spinner';
 import { TableSkeleton } from '@/components/skeletons/TableSkeleton';
+import { formatCurrency } from '@/lib/utils';
 
 type Props = {
   portfolio: Portfolio | null;
@@ -37,9 +38,9 @@ export default function PositionsTable({ portfolio, assets, isLoading }: Props) 
             <tr key={position.id} className="border-b hover:bg-muted/50">
               <td className="p-4">{position.asset}</td>
               <td className="text-right p-4">{position.quantity}</td>
-              <td className="text-right p-4">${position.price.toLocaleString()}</td>
+              <td className="text-right p-4">{formatCurrency(position.price)}</td>
               <td className="text-right p-4">
-                ${(position.quantity * position.price).toLocaleString()}
+                {formatCurrency(position.quantity * position.price)}
               </td>
             </tr>
           ))}

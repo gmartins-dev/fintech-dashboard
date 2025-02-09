@@ -3,6 +3,7 @@ import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recha
 import { Asset, Portfolio } from '@/types/api';
 import { Spinner } from '@/components/ui/spinner';
 import { CardSkeleton } from './skeletons/CardSkeleton';
+import { formatCurrency } from '@/lib/utils';
 
 type Props = {
   portfolio: Portfolio | null;
@@ -70,13 +71,13 @@ export default function PortfolioDonut({ portfolio, assets, isLoading }: Props) 
             fill="#8884d8"
             paddingAngle={5}
             dataKey="value"
-            label={({ name, value }) => `${name}: $${value.toLocaleString()}`}
+            label={({ name, value }) => `${name}: ${formatCurrency(value)}`}
           >
             {data.map((_, index) => (
               <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
             ))}
           </Pie>
-          <Tooltip />
+          <Tooltip formatter={(value) => formatCurrency(Number(value))} />
           <Legend verticalAlign="bottom" height={36} />
         </PieChart>
       </ResponsiveContainer>

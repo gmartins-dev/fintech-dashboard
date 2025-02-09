@@ -1,8 +1,10 @@
 import { useState } from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import { Portfolio, Price } from '@/types/api';
 import { Spinner } from '@/components/ui/spinner';
 import { CardSkeleton } from './skeletons/CardSkeleton';
+import { ChartTooltip } from './ChartTooltip';
+import { formatCurrency } from '@/lib/utils';
 
 type Props = {
   portfolio: Portfolio | null;
@@ -37,7 +39,7 @@ export default function HistoricalChart({ portfolio, prices, isLoading }: Props)
 
   return (
     <div className="h-[400px]">
-      <div className="mb-4">
+      <div className="mb-4 relative">
         <select
           value={timeRange}
           onChange={(e) => setTimeRange(e.target.value)}
@@ -50,12 +52,25 @@ export default function HistoricalChart({ portfolio, prices, isLoading }: Props)
         </select>
       </div>
       <ResponsiveContainer width="100%" height="85%">
-        <LineChart data={data} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+        <LineChart data={data}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="date" />
-          <YAxis />
-          <Tooltip />
-          <Line type="monotone" dataKey="value" stroke="#8884d8" />
+          <YAxis
+            tickFormatter={(value) => formatCurrency(value)}
+            width={80}
+          />
+          <Tooltip content={<ChartTooltip />} />
+          <Legend
+            verticalAlign="bottom"
+            height={36}
+          />
+          <Line
+            type="monotone"
+            dataKey="value"
+            name="Portfolio Value"
+            stroke="var(--primary)"
+            dot={false}
+          />
         </LineChart>
       </ResponsiveContainer>
     </div>
