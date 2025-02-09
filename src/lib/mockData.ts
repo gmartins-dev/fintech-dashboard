@@ -26,7 +26,7 @@ export const mockApi = {
     });
   },
 
-  getPrices: async (_assets?: string[], _asOf?: string): Promise<Price[]> => {
+  getPrices: async (): Promise<Price[]> => {
     const mockPrices: Price[] = mockAssets.map(asset => ({
       id: asset.id,
       asset: asset.name,
@@ -38,7 +38,7 @@ export const mockApi = {
     });
   },
 
-  getPortfolio: async (_asOf?: string): Promise<Portfolio> => {
+  getPortfolio: async (): Promise<Portfolio> => {
     return new Promise((resolve) => {
       setTimeout(() => resolve(mockPortfolio), 500);
     });

@@ -2,14 +2,14 @@
   "extends": "next/core-web-vitals",
   "rules": {
     "@typescript-eslint/no-unused-vars": [
-      "warn",
-      {
-        "argsIgnorePattern": "^_",
-        "varsIgnorePattern": "^_"
-      }
+      "error"
     ],
-    "react/no-unescaped-entities": "off",
-    "react-hooks/rules-of-hooks": "error",
+    "react/no-unescaped-entities": [
+      "error"
+    ],
+    "react-hooks/rules-of-hooks": [
+      "error"
+    ],
     "react-hooks/exhaustive-deps": "warn"
   }
 }

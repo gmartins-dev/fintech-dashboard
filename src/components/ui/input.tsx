@@ -1,6 +1,6 @@
 "use client"
 
-import * as React from "react"
+import { useId, forwardRef } from "react"
 import { cn } from "@/lib/utils"
 
 export interface InputProps
@@ -9,9 +9,9 @@ export interface InputProps
   error?: string
 }
 
-const Input = React.forwardRef<HTMLInputElement, InputProps>(
+const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, label, error, id, name, ...props }, ref) => {
-    const uniqueId = React.useId();
+    const uniqueId = useId();
     const inputId = id || name || uniqueId;
 
     return (

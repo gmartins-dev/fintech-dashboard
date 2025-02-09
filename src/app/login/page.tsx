@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import { mockApi } from '@/lib/mockData';
 import { Input } from '@/components/ui/input';
@@ -15,15 +15,13 @@ export default function LoginPage() {
   const usernameRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
-  async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setIsLoading(true);
     setError('');
 
     const username = usernameRef.current?.value.trim();
     const password = passwordRef.current?.value.trim();
-
-    console.log('Attempting login with:', { username, password });
 
     try {
       if (!username || !password) {
@@ -50,12 +48,10 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen relative">
-      {/* Theme toggle in top-right corner */}
       <div className="absolute top-4 right-4 z-10">
         <ThemeToggle />
       </div>
 
-      {/* Existing login form wrapped in centered container */}
       <div className="min-h-screen grid place-items-center bg-gradient-to-b from-background to-secondary/20">
         <form
           onSubmit={onSubmit}
@@ -102,7 +98,7 @@ export default function LoginPage() {
             )}
           </Button>
           <p className="text-sm text-center text-muted-foreground">
-            * Use &apos;demo&apos; for both username and password
+            * Use "demo" for both username and password.
           </p>
         </form>
       </div>

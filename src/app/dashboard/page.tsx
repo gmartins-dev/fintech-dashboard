@@ -39,11 +39,6 @@ export default function Dashboard() {
     fetchData();
   }, []);
 
-  const handleLogout = async () => {
-    await mockApi.logout();
-    router.push('/login');
-  };
-
   if (error) {
     return (
       <AppLayout>
