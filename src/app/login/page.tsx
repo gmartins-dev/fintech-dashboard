@@ -6,6 +6,7 @@ import { mockApi } from '@/lib/mockData';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { ThemeToggle } from '@/components/ThemeToggle';
+import { Spinner } from '@/components/ui/spinner';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -91,7 +92,14 @@ export default function LoginPage() {
             className="w-full"
             disabled={isLoading}
           >
-            {isLoading ? 'Logging in...' : 'Login'}
+            {isLoading ? (
+              <>
+                <Spinner />
+                Logging in...
+              </>
+            ) : (
+              'Login'
+            )}
           </Button>
           <p className="text-sm text-center text-muted-foreground">
             * Use "demo" for both username and password

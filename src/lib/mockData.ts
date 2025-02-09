@@ -47,17 +47,16 @@ export const mockApi = {
 
   login: async (username: string, password: string): Promise<boolean> => {
     return new Promise((resolve) => {
+      // TODO: remove this timeout after demo and replace with actual login logic
+      // Increased timeout to 1,5 seconds to demo the spinner
       setTimeout(() => {
         const isValid = username.toLowerCase() === 'demo' && password === 'demo';
-
         if (isValid) {
           localStorage.setItem('isAuthenticated', 'true');
-          document.cookie = 'auth=true; path=/; max-age=86400'; // set 24 hours cookie duration
-
+          document.cookie = 'auth=true; path=/; max-age=86400'; //set cookie duration for 24 hours
         }
-
         resolve(isValid);
-      }, 500);
+      }, 1500);
     });
   },
 
