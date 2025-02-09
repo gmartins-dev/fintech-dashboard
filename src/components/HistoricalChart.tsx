@@ -53,11 +53,21 @@ export default function HistoricalChart({ portfolio, prices, isLoading }: Props)
       </div>
       <ResponsiveContainer width="100%" height="85%">
         <LineChart data={data}>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="date" />
+          <CartesianGrid
+            strokeDasharray="3 3"
+            className="opacity-20"
+            stroke="currentColor"
+          />
+          <XAxis
+            dataKey="date"
+            stroke="currentColor"
+            className="text-muted-foreground text-xs"
+          />
           <YAxis
             tickFormatter={(value) => formatCurrency(value)}
             width={80}
+            stroke="currentColor"
+            className="text-muted-foreground text-xs"
           />
           <Tooltip content={<ChartTooltip />} />
           <Legend
@@ -67,9 +77,11 @@ export default function HistoricalChart({ portfolio, prices, isLoading }: Props)
           <Line
             type="monotone"
             dataKey="value"
-            name="Portfolio Value"
-            stroke="var(--primary)"
+            className="text-primary dark:text-primary"
+            stroke="currentColor"
             dot={false}
+            strokeWidth={2}
+            name='Portfolio Value'
           />
         </LineChart>
       </ResponsiveContainer>
