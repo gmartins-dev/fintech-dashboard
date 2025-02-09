@@ -1,40 +1,48 @@
-import { Asset, Portfolio } from '@/types/api';
+import { Portfolio, Asset } from '@/types/api';
+import { Spinner } from '@/components/ui/spinner';
+import { TableSkeleton } from '@/components/skeletons/TableSkeleton';
 
 type Props = {
   portfolio: Portfolio | null;
   assets: Asset[];
+  isLoading?: boolean;
 };
 
-export default function PositionsTable({ portfolio, assets }: Props) {
-  if (!portfolio) return <div>Loading...</div>;
+export default function PositionsTable({ portfolio, assets, isLoading }: Props) {
+  if (isLoading) {
+    return (
+      <div className="min-h-[200px] flex items-center justify-center">
+        <Spinner className="h-8 w-8" />
+      </div>
+    );
+  }
+
+  if (!portfolio || !assets?.length) {
+    return <TableSkeleton />;
+  }
 
   return (
     <div className="overflow-x-auto">
-      <table className="min-w-full divide-y divide-border">
+      <table className="w-full text-sm">
         <thead>
-          <tr>
-            <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">Asset</th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">Type</th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">Quantity</th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">Price</th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">Value</th>
+          <tr className="border-b">
+            <th className="text-left p-4">Asset</th>
+            <th className="text-right p-4">Quantity</th>
+            <th className="text-right p-4">Price</th>
+            <th className="text-right p-4">Value</th>
           </tr>
         </thead>
-        <tbody className="divide-y divide-border">
-          {portfolio.positions.map((position) => {
-            const asset = assets.find(a => a.name === position.asset);
-            const value = position.quantity * position.price;
-
-            return (
-              <tr key={position.id}>
-                <td className="px-6 py-4 whitespace-nowrap">{position.asset}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{asset?.type || 'unknown'}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{position.quantity}</td>
-                <td className="px-6 py-4 whitespace-nowrap">${position.price.toLocaleString()}</td>
-                <td className="px-6 py-4 whitespace-nowrap">${value.toLocaleString()}</td>
-              </tr>
-            );
-          })}
+        <tbody>
+          {portfolio.positions.map((position) => (
+            <tr key={position.id} className="border-b hover:bg-muted/50">
+              <td className="p-4">{position.asset}</td>
+              <td className="text-right p-4">{position.quantity}</td>
+              <td className="text-right p-4">${position.price.toLocaleString()}</td>
+              <td className="text-right p-4">
+                ${(position.quantity * position.price).toLocaleString()}
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>

@@ -1,16 +1,29 @@
 import { useState } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { Portfolio, Price } from '@/types/api';
+import { Spinner } from '@/components/ui/spinner';
+import { CardSkeleton } from './skeletons/CardSkeleton';
 
 type Props = {
   portfolio: Portfolio | null;
   prices: Price[];
+  isLoading?: boolean;
 };
 
-export default function HistoricalChart({ portfolio, prices }: Props) {
+export default function HistoricalChart({ portfolio, prices, isLoading }: Props) {
   const [timeRange, setTimeRange] = useState('1M');
 
-  if (!portfolio) return <div>Loading...</div>;
+  if (isLoading) {
+    return (
+      <div className="h-[400px] flex items-center justify-center">
+        <Spinner className="h-8 w-8" />
+      </div>
+    );
+  }
+
+  if (!portfolio || !prices?.length) {
+    return <CardSkeleton />;
+  }
 
   // Mock historical data - in real app, this would come from the API
   const data = Array.from({ length: 30 }, (_, i) => {
@@ -37,10 +50,7 @@ export default function HistoricalChart({ portfolio, prices }: Props) {
         </select>
       </div>
       <ResponsiveContainer width="100%" height="100%">
-        <LineChart
-          data={data}
-          margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-        >
+        <LineChart data={data} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="date" />
           <YAxis />

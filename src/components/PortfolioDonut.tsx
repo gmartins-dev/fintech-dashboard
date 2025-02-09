@@ -1,19 +1,30 @@
 import { useState } from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recharts';
 import { Asset, Portfolio } from '@/types/api';
+import { Spinner } from '@/components/ui/spinner';
+import { CardSkeleton } from './skeletons/CardSkeleton';
 
 type Props = {
   portfolio: Portfolio | null;
   assets: Asset[];
+  isLoading?: boolean;
 };
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884D8'];
 
-export default function PortfolioDonut({ portfolio, assets }: Props) {
+export default function PortfolioDonut({ portfolio, assets, isLoading }: Props) {
   const [viewBy, setViewBy] = useState<'asset' | 'type'>('asset');
 
-  if (!portfolio || !assets.length) {
-    return <div>Loading...</div>;
+  if (isLoading) {
+    return (
+      <div className="h-[400px] flex items-center justify-center">
+        <Spinner className="h-8 w-8" />
+      </div>
+    );
+  }
+
+  if (!portfolio || !assets?.length) {
+    return <CardSkeleton />;
   }
 
   const getData = () => {
@@ -42,7 +53,7 @@ export default function PortfolioDonut({ portfolio, assets }: Props) {
         <select
           value={viewBy}
           onChange={(e) => setViewBy(e.target.value as 'asset' | 'type')}
-          className="p-2 border rounded"
+          className="bg-background text-foreground border border-input hover:border-primary rounded-md px-3 py-2 text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
           <option value="asset">By Asset</option>
           <option value="type">By Type</option>

@@ -11,16 +11,19 @@ import { useRouter } from 'next/navigation';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { TooltipProvider, TooltipRoot, TooltipTrigger, TooltipContent } from '@/components/ui/tooltip';
 import { Button } from '@/components/ui/button';
+import { CardSkeleton } from '@/components/skeletons/CardSkeleton';
 
 export default function Dashboard() {
   const [assets, setAssets] = useState<Asset[]>([]);
   const [portfolio, setPortfolio] = useState<Portfolio | null>(null);
   const [prices, setPrices] = useState<Price[]>([]);
   const [error, setError] = useState<string>('');
+  const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true);
       try {
         const [assetsData, portfolioData, pricesData] = await Promise.all([
           mockApi.getAssets(),
@@ -32,6 +35,8 @@ export default function Dashboard() {
         setPrices(pricesData);
       } catch (e) {
         setError('Failed to load portfolio data');
+      } finally {
+        setIsLoading(false);
       }
     };
     fetchData();
@@ -85,17 +90,17 @@ export default function Dashboard() {
         <div className="grid md:grid-cols-2 gap-6">
           <div className="bg-card p-6 rounded-lg shadow">
             <h2 className="text-xl font-semibold mb-4">Portfolio Allocation</h2>
-            <PortfolioDonut portfolio={portfolio} assets={assets} />
+            <PortfolioDonut portfolio={portfolio} assets={assets} isLoading={isLoading} />
           </div>
           <div className="bg-card p-6 rounded-lg shadow">
             <h2 className="text-xl font-semibold mb-4">Historical Performance</h2>
-            <HistoricalChart portfolio={portfolio} prices={prices} />
+            <HistoricalChart portfolio={portfolio} prices={prices} isLoading={isLoading} />
           </div>
         </div>
 
         <div className="bg-card p-6 rounded-lg shadow">
           <h2 className="text-xl font-semibold mb-4">Positions</h2>
-          <PositionsTable portfolio={portfolio} assets={assets} />
+          <PositionsTable portfolio={portfolio} assets={assets} isLoading={isLoading} />
         </div>
       </div>
     </div>
