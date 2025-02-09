@@ -1,103 +1,129 @@
-# Fintech Dashboard
+# Financial Portfolio Dashboard
 
-A modern, responsive financial portfolio dashboard built with Next.js, TypeScript, and Recharts.
+A modern, responsive financial portfolio dashboard built with Next.js 14, featuring real-time portfolio visualization, theme support, and a clean, professional UI.
 
-## Features
+## Key Features
 
-- Portfolio visualization with donut and line charts
-- Asset allocation breakdown
-- Positions table with detailed view
-- Dark/Light theme support
-- Responsive design
-- Mock API integration
+- 📊 Interactive Charts
+  - Portfolio allocation donut chart with asset/type toggle
+  - Historical performance line chart with time range selection
+  - Responsive and theme-aware visualizations
+  - Real-time data updates
+
+- 💼 Portfolio Management
+  - Detailed positions table
+  - Asset breakdown by type
+  - Currency-formatted values
+  - Comprehensive portfolio overview
+
+- 🎨 Modern UI/UX
+  - Light/Dark theme with system detection
+  - Smooth transitions and animations
+  - Responsive design for all devices
+  - Loading states with skeletons
+  - Custom tooltips and interactions
+
+- 🔒 Security & Authentication
+  - Protected routes with middleware
+  - Session management
+  - Secure cookie handling
+  - Mock authentication system
 
 ## Tech Stack
 
-- Next.js 14
-- TypeScript
-- Tailwind CSS
-- Recharts
-- Shadcn/UI
+- **Framework**: Next.js 14 (using App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS with CSS Variables
+- **Components**:
+  - Shadcn/UI for base components
+  - Recharts for data visualization
+  - Custom themed components
+- **Authentication**: Localstorage using custom middleware with cookies
+- **State Management**: React hooks and context
+- **Development**:
+  - ESLint for code quality
+  - Jest for testing
+  - Prettier for code formatting
 
 ## Getting Started
 
-1. Clone the repository:
+1. Clone and install:
 ```bash
 git clone https://github.com/yourusername/fintech-dashboard.git
 cd fintech-dashboard
-```
-
-2. Install dependencies:
-```bash
 npm install
 ```
 
-3. Run the development server:
+2. Run the development server:
 ```bash
 npm run dev
 ```
 
-4. Open [http://localhost:3000](http://localhost:3000) in your browser
+3. Open [http://localhost:3000](http://localhost:3000)
 
-## Testing
+## Project Structure
 
-Run the test suite:
-```bash
-npm test
+```
+src/
+├── app/                  # Next.js app router pages
+├── components/
+│   ├── ui/              # Base UI components
+│   ├── layouts/         # Layout components
+│   └── skeletons/       # Loading states
+├── lib/                 # Utilities and helpers
+└── types/               # TypeScript definitions
 ```
 
-```bash
-# Run tests
-npm test
+## Features in Detail
 
-# Run tests with coverage
-npm run test:coverage
-
-# Run tests in watch mode
-npm run test:watch
-```
-
-## Login Credentials
-
-Use the following credentials to log in:
-- Username: demo
-- Password: demo
-
-## Architecture
-
-The application follows a modular architecture with:
-- Components: Reusable UI components
-- Hooks: Custom React hooks for shared logic
-- Types: TypeScript interfaces and types
-- Utils: Helper functions and utilities
-- API: Mock API implementation
-
-## Error Handling
-
-The application includes multiple layers of error handling:
-- Global Error Boundary for uncaught errors
-- API call error handling with user feedback
-- Form validation with error messages
-- Loading states with skeletons
-
-## Theming
-
-The application supports light and dark themes with:
+### Theme System
 - System preference detection
 - Manual theme toggle
 - Persistent theme selection
-- Smooth transitions
+- CSS variables for consistent styling
+- Smooth theme transitions
 
-## Performance
+### Charts
+- Interactive data visualization
+- Theme-aware colors and styling
+- Custom tooltips
+- Responsive layouts
+- Loading states
 
-- Code splitting with Next.js
-- Optimized images and assets
-- Minimized bundle size
+### Authentication
+- Protected routes
+- Session management
+- Mock API integration
+- Login/Logout functionality
+
+### Performance
+- Component-level code splitting
+- Optimized bundle size
 - Efficient re-renders
+- Loading state management
 
-## Security
+## Development
 
-- Protected routes with middleware
-- Form validation
-- Secure cookie handling
-- XSS protection
+```bash
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Run tests
+npm test
+
+# Lint code
+npm run lint
+```
+
+## Demo Credentials
+```
+Username: demo
+Password: demo
+```
+
+## License
+
+MIT License - feel free to use this project as a template for your own dashboard!
