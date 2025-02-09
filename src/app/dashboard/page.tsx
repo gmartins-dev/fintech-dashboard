@@ -1,17 +1,13 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { LogOut } from 'lucide-react';
 import { mockApi } from '@/lib/mockData';
 import { Asset, Portfolio, Price } from '@/types/api';
 import PortfolioDonut from '@/components/PortfolioDonut';
 import PositionsTable from '@/components/PositionsTable';
 import HistoricalChart from '@/components/HistoricalChart';
+import { AppLayout } from '@/components/layouts/AppLayout';
 import { useRouter } from 'next/navigation';
-import { ThemeToggle } from '@/components/ThemeToggle';
-import { TooltipProvider, TooltipRoot, TooltipTrigger, TooltipContent } from '@/components/ui/tooltip';
-import { Button } from '@/components/ui/button';
-import { CardSkeleton } from '@/components/skeletons/CardSkeleton';
 
 export default function Dashboard() {
   const [assets, setAssets] = useState<Asset[]>([]);
@@ -33,8 +29,8 @@ export default function Dashboard() {
         setAssets(assetsData);
         setPortfolio(portfolioData);
         setPrices(pricesData);
-      } catch (e) {
-        setError('Failed to load portfolio data');
+      } catch (error) {
+        console.error('Error loading data:', error);
       } finally {
         setIsLoading(false);
       }
@@ -48,61 +44,34 @@ export default function Dashboard() {
   };
 
   if (error) {
-    return <div className="text-destructive p-4">{error}</div>;
+    return (
+      <AppLayout>
+        <div className="text-destructive p-4">{error}</div>
+      </AppLayout>
+    );
   }
 
   return (
-    <div className="min-h-screen p-6 bg-background">
-      <div className="max-w-7xl mx-auto space-y-6">
-        <div className="flex justify-between items-center">
-          <h1 className="text-3xl font-bold">Portfolio Dashboard</h1>
-          <TooltipProvider>
-            <div className="flex items-center gap-4">
-              <TooltipRoot>
-                <TooltipTrigger asChild>
-                  <div>
-                    <ThemeToggle />
-                  </div>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>Toggle theme</p>
-                </TooltipContent>
-              </TooltipRoot>
+    <AppLayout>
+      <div className="flex items-center gap-2 my-4">
+        <h1 className="text-3xl font-bold text-foreground">Portfolio Overview</h1>
+      </div>
 
-              <TooltipRoot>
-                <TooltipTrigger asChild>
-                  <Button
-                    onClick={handleLogout}
-                    variant="icon"
-                    size="icon"
-                  >
-                    <LogOut className="h-5 w-5" />
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>Logout</p>
-                </TooltipContent>
-              </TooltipRoot>
-            </div>
-          </TooltipProvider>
+      <div className="grid md:grid-cols-2 gap-6">
+        <div className="bg-card p-6 rounded-lg shadow-md border hover:shadow-lg transition-shadow">
+          <h2 className="text-xl font-semibold mb-4 text-card-foreground">Portfolio Allocation</h2>
+          <PortfolioDonut portfolio={portfolio} assets={assets} isLoading={isLoading} />
         </div>
-
-        <div className="grid md:grid-cols-2 gap-6">
-          <div className="bg-card p-6 rounded-lg shadow">
-            <h2 className="text-xl font-semibold mb-4">Portfolio Allocation</h2>
-            <PortfolioDonut portfolio={portfolio} assets={assets} isLoading={isLoading} />
-          </div>
-          <div className="bg-card p-6 rounded-lg shadow">
-            <h2 className="text-xl font-semibold mb-4">Historical Performance</h2>
-            <HistoricalChart portfolio={portfolio} prices={prices} isLoading={isLoading} />
-          </div>
-        </div>
-
-        <div className="bg-card p-6 rounded-lg shadow">
-          <h2 className="text-xl font-semibold mb-4">Positions</h2>
-          <PositionsTable portfolio={portfolio} assets={assets} isLoading={isLoading} />
+        <div className="bg-card p-6 rounded-lg shadow-md border hover:shadow-lg transition-shadow">
+          <h2 className="text-xl font-semibold mb-4 text-card-foreground">Historical Performance</h2>
+          <HistoricalChart portfolio={portfolio} prices={prices} isLoading={isLoading} />
         </div>
       </div>
-    </div>
+
+      <div className="bg-card p-6 rounded-lg shadow-md border hover:shadow-lg transition-shadow">
+        <h2 className="text-xl font-semibold mb-4 text-card-foreground">Positions</h2>
+        <PositionsTable portfolio={portfolio} assets={assets} isLoading={isLoading} />
+      </div>
+    </AppLayout>
   );
 }

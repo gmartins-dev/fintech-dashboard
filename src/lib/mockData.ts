@@ -1,5 +1,4 @@
 import { Asset, Portfolio, Price } from '@/types/api';
-import Cookies from 'js-cookie';
 
 const mockAssets: Asset[] = [
   { id: '1', name: 'BTC', type: 'crypto' },
@@ -27,7 +26,7 @@ export const mockApi = {
     });
   },
 
-  getPrices: async (assets?: string[], asOf?: string): Promise<Price[]> => {
+  getPrices: async (_assets?: string[], _asOf?: string): Promise<Price[]> => {
     const mockPrices: Price[] = mockAssets.map(asset => ({
       id: asset.id,
       asset: asset.name,
@@ -39,7 +38,7 @@ export const mockApi = {
     });
   },
 
-  getPortfolio: async (asOf?: string): Promise<Portfolio> => {
+  getPortfolio: async (_asOf?: string): Promise<Portfolio> => {
     return new Promise((resolve) => {
       setTimeout(() => resolve(mockPortfolio), 500);
     });
