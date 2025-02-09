@@ -102,7 +102,7 @@ export default function LoginPage() {
             )}
           </Button>
           <p className="text-sm text-center text-muted-foreground">
-            * Use "demo" for both username and password
+            * Use &apos;demo&apos; for both username and password
           </p>
         </form>
       </div>

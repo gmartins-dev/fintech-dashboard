@@ -7,6 +7,7 @@ import PortfolioDonut from '@/components/PortfolioDonut';
 import PositionsTable from '@/components/PositionsTable';
 import HistoricalChart from '@/components/HistoricalChart';
 import { AppLayout } from '@/components/layouts/AppLayout';
+import { useRouter } from 'next/navigation';
 
 export default function Dashboard() {
   const [assets, setAssets] = useState<Asset[]>([]);
@@ -14,6 +15,7 @@ export default function Dashboard() {
   const [prices, setPrices] = useState<Price[]>([]);
   const [error, setError] = useState<string>('');
   const [isLoading, setIsLoading] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,8 +30,8 @@ export default function Dashboard() {
         setPortfolio(portfolioData);
         setPrices(pricesData);
       } catch (error) {
-        setError('Failed to load portfolio data');
         console.error('Error loading data:', error);
+        setError('Failed to load portfolio data');
       } finally {
         setIsLoading(false);
       }

@@ -6,7 +6,7 @@ export function Footer() {
           <div className="py-4 md:py-6">
             <div className="text-center space-y-2">
               <p className="text-sm font-medium text-primary/90">
-                &copy; {new Date().getFullYear()} Fintech Dashboard. All rights reserved.
+                &copy; {new Date().getFullYear()} My Wallet Financial Dashboard.
               </p>
               <div className="text-sm text-card-foreground/80">
                 Built with{' '}
