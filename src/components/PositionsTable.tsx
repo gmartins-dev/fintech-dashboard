@@ -2,7 +2,7 @@ import { Portfolio, Asset } from '@/types/api';
 import { Spinner } from '@/components/ui/spinner';
 import { TableSkeleton } from '@/components/skeletons/TableSkeleton';
 import { formatCurrency } from '@/lib/utils';
-import { BadgeJapaneseYen, BadgeRussianRuble, BadgeSwissFranc, BadgeIndianRupee, BadgeDollarSign, BadgeEuro, BadgeCent, BadgePoundSterling
+import { BadgeJapaneseYen, BadgeRussianRuble, BadgeSwissFranc, BadgeDollarSign, BadgeEuro, BadgeCent, BadgePoundSterling
  } from 'lucide-react';
 
 type Props = {
@@ -58,7 +58,6 @@ export default function PositionsTable({ portfolio, assets, isLoading }: Props) 
         </thead>
         <tbody>
           {portfolio.positions.map((position) => {
-            const asset = assets.find(a => a.name === position.asset);
             return (
               <tr key={position.id} className="border-b hover:bg-muted/50">
                 <td className="p-4">

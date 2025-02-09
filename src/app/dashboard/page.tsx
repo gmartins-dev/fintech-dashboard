@@ -7,7 +7,6 @@ import PortfolioDonut from '@/components/PortfolioDonut';
 import PositionsTable from '@/components/PositionsTable';
 import HistoricalChart from '@/components/HistoricalChart';
 import { AppLayout } from '@/components/layouts/AppLayout';
-import { useRouter } from 'next/navigation';
 
 export default function Dashboard() {
   const [assets, setAssets] = useState<Asset[]>([]);
@@ -15,7 +14,6 @@ export default function Dashboard() {
   const [prices, setPrices] = useState<Price[]>([]);
   const [error, setError] = useState<string>('');
   const [isLoading, setIsLoading] = useState(true);
-  const router = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {
