@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { LogOut } from 'lucide-react';
 import { mockApi } from '@/lib/mockData';
 import { Asset, Portfolio, Price } from '@/types/api';
 import PortfolioDonut from '@/components/PortfolioDonut';
@@ -8,6 +9,8 @@ import PositionsTable from '@/components/PositionsTable';
 import HistoricalChart from '@/components/HistoricalChart';
 import { useRouter } from 'next/navigation';
 import { ThemeToggle } from '@/components/ThemeToggle';
+import { TooltipProvider, TooltipRoot, TooltipTrigger, TooltipContent } from '@/components/ui/tooltip';
+import { Button } from '@/components/ui/button';
 
 export default function Dashboard() {
   const [assets, setAssets] = useState<Asset[]>([]);
@@ -48,15 +51,35 @@ export default function Dashboard() {
       <div className="max-w-7xl mx-auto space-y-6">
         <div className="flex justify-between items-center">
           <h1 className="text-3xl font-bold">Portfolio Dashboard</h1>
-          <div className="flex items-center gap-4">
-            <ThemeToggle />
-            <button
-              onClick={handleLogout}
-              className="bg-destructive text-destructive-foreground px-4 py-2 rounded"
-            >
-              Logout
-            </button>
-          </div>
+          <TooltipProvider>
+            <div className="flex items-center gap-4">
+              <TooltipRoot>
+                <TooltipTrigger asChild>
+                  <div>
+                    <ThemeToggle />
+                  </div>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Toggle theme</p>
+                </TooltipContent>
+              </TooltipRoot>
+
+              <TooltipRoot>
+                <TooltipTrigger asChild>
+                  <Button
+                    onClick={handleLogout}
+                    variant="icon"
+                    size="icon"
+                  >
+                    <LogOut className="h-5 w-5" />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Logout</p>
+                </TooltipContent>
+              </TooltipRoot>
+            </div>
+          </TooltipProvider>
         </div>
 
         <div className="grid md:grid-cols-2 gap-6">

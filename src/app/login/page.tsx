@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { mockApi } from '@/lib/mockData';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -47,48 +48,56 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen grid place-items-center bg-gradient-to-b from-background to-secondary/20">
-      <form
-        onSubmit={onSubmit}
-        className="w-full max-w-sm space-y-6 p-8 bg-card rounded-lg border shadow-lg"
-      >
-        <h1 className="text-2xl font-bold text-center">Login</h1>
-        {error && (
-          <div className="p-3 text-sm text-destructive-foreground bg-destructive/10 rounded-md">
-            {error}
-          </div>
-        )}
-        <Input
-          ref={usernameRef}
-          label="Username"
-          name="username"
-          type="text"
-          placeholder="Enter username"
-          autoComplete="username"
-          defaultValue=""
-          required
-        />
-        <Input
-          ref={passwordRef}
-          label="Password"
-          name="password"
-          type="password"
-          placeholder="Enter password"
-          autoComplete="current-password"
-          defaultValue=""
-          required
-        />
-        <Button
-          type="submit"
-          className="w-full"
-          disabled={isLoading}
+    <div className="min-h-screen relative">
+      {/* Theme toggle in top-right corner */}
+      <div className="absolute top-4 right-4 z-10">
+        <ThemeToggle />
+      </div>
+
+      {/* Existing login form wrapped in centered container */}
+      <div className="min-h-screen grid place-items-center bg-gradient-to-b from-background to-secondary/20">
+        <form
+          onSubmit={onSubmit}
+          className="w-full max-w-sm space-y-6 p-8 bg-card rounded-lg border shadow-lg"
         >
-          {isLoading ? 'Logging in...' : 'Login'}
-        </Button>
-        <p className="text-sm text-center text-muted-foreground">
-          * Use "demo" for both username and password
-        </p>
-      </form>
+          <h1 className="text-2xl font-bold text-center">Login</h1>
+          {error && (
+            <div className="p-3 text-sm text-destructive-foreground bg-destructive/10 rounded-md">
+              {error}
+            </div>
+          )}
+          <Input
+            ref={usernameRef}
+            label="Username"
+            name="username"
+            type="text"
+            placeholder="Enter username"
+            autoComplete="username"
+            defaultValue=""
+            required
+          />
+          <Input
+            ref={passwordRef}
+            label="Password"
+            name="password"
+            type="password"
+            placeholder="Enter password"
+            autoComplete="current-password"
+            defaultValue=""
+            required
+          />
+          <Button
+            type="submit"
+            className="w-full"
+            disabled={isLoading}
+          >
+            {isLoading ? 'Logging in...' : 'Login'}
+          </Button>
+          <p className="text-sm text-center text-muted-foreground">
+            * Use "demo" for both username and password
+          </p>
+        </form>
+      </div>
     </div>
   );
 }

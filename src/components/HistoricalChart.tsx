@@ -28,7 +28,7 @@ export default function HistoricalChart({ portfolio, prices }: Props) {
         <select
           value={timeRange}
           onChange={(e) => setTimeRange(e.target.value)}
-          className="p-2 border rounded"
+          className="bg-background text-foreground border border-input hover:border-primary rounded-md px-3 py-2 text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
           <option value="1W">1 Week</option>
           <option value="1M">1 Month</option>
