@@ -1,30 +1,25 @@
 # Fintech Dashboard
 
-A responsive financial portfolio dashboard built with React, TypeScript, and Tailwind CSS.
+A modern, responsive financial portfolio dashboard built with Next.js, TypeScript, and Recharts.
 
 ## Features
 
-- Portfolio visualization with donut chart
-- Historical performance tracking
+- Portfolio visualization with donut and line charts
+- Asset allocation breakdown
 - Positions table with detailed view
+- Dark/Light theme support
 - Responsive design
-- Theme support via Tailwind
-- Protected routes with authentication
+- Mock API integration
 
 ## Tech Stack
 
-- Next.js 13+ with App Router
+- Next.js 14
 - TypeScript
-- Tailwind CSS for styling
-- Recharts for data visualization
-- Jest & React Testing Library for testing
+- Tailwind CSS
+- Recharts
+- Shadcn/UI
 
-## Prerequisites
-
-- Node.js 16.8 or later
-- npm or yarn
-
-## Installation
+## Getting Started
 
 1. Clone the repository:
 ```bash
@@ -40,15 +35,9 @@ npm install
 3. Run the development server:
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-4. Open [http://localhost:3000](http://localhost:3000) in your browser.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
 ## Testing
 
@@ -57,31 +46,58 @@ Run the test suite:
 npm test
 ```
 
+```bash
+# Run tests
+npm test
+
+# Run tests with coverage
+npm run test:coverage
+
+# Run tests in watch mode
+npm run test:watch
+```
+
 ## Login Credentials
 
-Use the following demo credentials:
+Use the following credentials to log in:
 - Username: demo
 - Password: demo
 
-## API Documentation
+## Architecture
 
-The application uses the following endpoints:
+The application follows a modular architecture with:
+- Components: Reusable UI components
+- Hooks: Custom React hooks for shared logic
+- Types: TypeScript interfaces and types
+- Utils: Helper functions and utilities
+- API: Mock API implementation
 
-- GET /assets - Fetch all available assets
-- GET /prices - Fetch asset prices with optional date filtering
-- GET /portfolios - Fetch user portfolio data
+## Error Handling
 
-## Learn More
+The application includes multiple layers of error handling:
+- Global Error Boundary for uncaught errors
+- API call error handling with user feedback
+- Form validation with error messages
+- Loading states with skeletons
 
-To learn more about Next.js, take a look at the following resources:
+## Theming
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The application supports light and dark themes with:
+- System preference detection
+- Manual theme toggle
+- Persistent theme selection
+- Smooth transitions
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Performance
 
-## Deploy on Vercel
+- Code splitting with Next.js
+- Optimized images and assets
+- Minimized bundle size
+- Efficient re-renders
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Security
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Protected routes with middleware
+- Form validation
+- Secure cookie handling
+- XSS protection

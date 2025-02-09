@@ -3,6 +3,7 @@ import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
 import "./globals.css"
 import { ThemeProvider } from '@/components/ThemeProvider'
+import { GlobalErrorBoundary } from '@/components/GlobalErrorBoundary';
 
 export const metadata: Metadata = {
   title: "Fintech Dashboard",
@@ -40,7 +41,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <GlobalErrorBoundary>
+            {children}
+          </GlobalErrorBoundary>
         </ThemeProvider>
       </body>
     </html>
