@@ -1,9 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Fintech Dashboard
 
-## Getting Started
+A responsive financial portfolio dashboard built with React, TypeScript, and Tailwind CSS.
 
-First, run the development server:
+## Features
 
+- Portfolio visualization with donut chart
+- Historical performance tracking
+- Positions table with detailed view
+- Responsive design
+- Theme support via Tailwind
+- Protected routes with authentication
+
+## Tech Stack
+
+- Next.js 13+ with App Router
+- TypeScript
+- Tailwind CSS for styling
+- Recharts for data visualization
+- Jest & React Testing Library for testing
+
+## Prerequisites
+
+- Node.js 16.8 or later
+- npm or yarn
+
+## Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/fintech-dashboard.git
+cd fintech-dashboard
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Run the development server:
 ```bash
 npm run dev
 # or
@@ -14,11 +48,28 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Testing
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Run the test suite:
+```bash
+npm test
+```
+
+## Login Credentials
+
+Use the following demo credentials:
+- Username: demo
+- Password: demo
+
+## API Documentation
+
+The application uses the following endpoints:
+
+- GET /assets - Fetch all available assets
+- GET /prices - Fetch asset prices with optional date filtering
+- GET /portfolios - Fetch user portfolio data
 
 ## Learn More
 
