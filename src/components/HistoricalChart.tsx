@@ -49,7 +49,7 @@ export default function HistoricalChart({ portfolio, prices, isLoading }: Props)
           <option value="1Y">1 Year</option>
         </select>
       </div>
-      <ResponsiveContainer width="100%" height="100%">
+      <ResponsiveContainer width="100%" height="85%">
         <LineChart data={data} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="date" />

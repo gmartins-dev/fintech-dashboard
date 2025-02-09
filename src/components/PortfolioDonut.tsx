@@ -53,13 +53,13 @@ export default function PortfolioDonut({ portfolio, assets, isLoading }: Props) 
         <select
           value={viewBy}
           onChange={(e) => setViewBy(e.target.value as 'asset' | 'type')}
-          className="bg-background text-foreground border border-input hover:border-primary rounded-md px-3 py-2 text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          className="bg-background text-foreground border border-input hover:border-primary rounded-md py-2 pl-3 pr-5 text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
           <option value="asset">By Asset</option>
           <option value="type">By Type</option>
         </select>
       </div>
-      <ResponsiveContainer width="100%" height="100%">
+      <ResponsiveContainer width="100%" height="85%">
         <PieChart>
           <Pie
             data={data}
@@ -77,7 +77,7 @@ export default function PortfolioDonut({ portfolio, assets, isLoading }: Props) 
             ))}
           </Pie>
           <Tooltip />
-          <Legend />
+          <Legend verticalAlign="bottom" height={36} />
         </PieChart>
       </ResponsiveContainer>
     </div>
