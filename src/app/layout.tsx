@@ -6,7 +6,7 @@ import { ThemeProvider } from '@/components/ThemeProvider'
 import { GlobalErrorBoundary } from '@/components/GlobalErrorBoundary';
 
 export const metadata: Metadata = {
-  title: "Fintech Dashboard",
+  title: "My Wallet",
   description: "A modern financial portfolio dashboard",
 }
 
@@ -17,23 +17,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              let theme = localStorage.getItem("theme")
-              if (!theme) {
-                if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-                  theme = "dark"
-                } else {
-                  theme = "light"
-                }
-              }
-              document.documentElement.classList.toggle("dark", theme === "dark")
-            `,
-          }}
-        />
-      </head>
       <body className={`${GeistSans.variable} ${GeistMono.variable} font-sans antialiased`}>
         <ThemeProvider
           attribute="class"

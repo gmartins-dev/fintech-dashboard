@@ -24,8 +24,15 @@ export default function PortfolioDonut({ portfolio, assets, isLoading }: Props) 
     );
   }
 
-  if (!portfolio || !assets?.length) {
-    return <CardSkeleton />;
+  if (!portfolio || !assets) {
+    return (
+      <div className="bg-card p-6 rounded-lg shadow">
+        <div className="animate-pulse rounded-md bg-gradient-to-r from-muted/60 via-muted to-muted/60 relative overflow-hidden after:absolute after:inset-0 after:translate-x-[-100%] after:animate-[shimmer_1.5s_infinite] after:bg-gradient-to-r after:from-transparent after:via-muted-foreground/10 after:to-transparent h-6 w-1/3 mb-4">
+          <span className="sr-only">Loading...</span>
+        </div>
+        {/* ...rest of loading skeleton... */}
+      </div>
+    );
   }
 
   const getData = () => {
@@ -49,7 +56,7 @@ export default function PortfolioDonut({ portfolio, assets, isLoading }: Props) 
   const data = getData();
 
   return (
-    <div className="h-[400px]">
+    <div className="h-[400px]" style={{ minHeight: '400px' }}>
       <div className="mb-4">
         <select
           value={viewBy}
@@ -60,7 +67,7 @@ export default function PortfolioDonut({ portfolio, assets, isLoading }: Props) 
           <option value="type">By Type</option>
         </select>
       </div>
-      <ResponsiveContainer width="100%" height="85%">
+      <ResponsiveContainer width="100%" height="85%" minHeight={300}>
         <PieChart>
           <Pie
             data={data}

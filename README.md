@@ -1,6 +1,16 @@
-# Financial Portfolio Dashboard
+# My Wallet - Financial Dashboard
 
 A modern, responsive financial portfolio dashboard built with Next.js 14, featuring real-time portfolio visualization, theme support, and a clean, professional UI.
+
+## Live Demo
+
+[https://fintech-dashboard-umber.vercel.app/](https://fintech-dashboard-umber.vercel.app/)
+
+Demo Credentials
+```
+Username: demo
+Password: demo
+```
 
 ## Key Features
 
@@ -45,7 +55,7 @@ A modern, responsive financial portfolio dashboard built with Next.js 14, featur
   - Jest for testing
   - Prettier for code formatting
 
-## Getting Started
+## Getting Started (Local Setup)
 
 1. Clone and install:
 ```bash
@@ -65,13 +75,37 @@ npm run dev
 
 ```
 src/
-├── app/                  # Next.js app router pages
+├── app/                    # Next.js app router pages
+│   ├── (auth)/            # Authentication routes
+│   ├── (dashboard)/       # Protected dashboard routes
+│   └── layout.tsx         # Root layout
 ├── components/
-│   ├── ui/              # Base UI components
-│   ├── layouts/         # Layout components
-│   └── skeletons/       # Loading states
-├── lib/                 # Utilities and helpers
-└── types/               # TypeScript definitions
+│   ├── charts/            # Chart components
+│   ├── dashboard/         # Dashboard specific components
+│   ├── ui/                # Base UI components
+│   └── skeletons/         # Loading states
+├── lib/
+│   ├── utils.ts           # Utility functions
+│   └── constants.ts       # Global constants
+├── styles/                # Global styles
+├── types/                 # TypeScript definitions
+└── test/                  # Test utilities
+```
+
+## Available Scripts
+
+```bash
+# Development
+npm run dev          # Start development server
+npm run build        # Build production bundle
+npm run start        # Run production server
+npm run lint         # Run ESLint
+
+# Testing
+npm test            # Run all tests
+npm run test:watch  # Watch mode
+npm run test:unit   # Unit tests only
+npm run test:e2e    # E2E tests
 ```
 
 ## Features in Detail
@@ -116,14 +150,44 @@ npm test
 
 # Lint code
 npm run lint
+
+## Testing
+
+The project implements a comprehensive testing strategy:
+
+### Unit & Integration Tests
+- Jest and React Testing Library
+- Component testing
+- Custom hook testing
+- Utils and helpers testing
+- Mock service workers for API testing
+
+### E2E Tests
+- Playwright for end-to-end testing
+- Critical user flows covered
+- Cross-browser testing
+- Mobile responsive testing
+
+### Running Tests
+
+```bash
+# Run all tests
+npm test
+
+# Run unit tests
+npm run test:unit
+
+# Run integration tests
+npm run test:integration
+
+# Run E2E tests
+npm run test:e2e
+
+# Run tests in watch mode
+npm run test:watch
 ```
 
-## Demo Credentials
-```
-Username: demo
-Password: demo
-```
 
 ## License
 
-MIT License - feel free to use this project as a template for your own dashboard!
+MIT License - feel free to use this project as a template or inspiration for your own dashboard!
