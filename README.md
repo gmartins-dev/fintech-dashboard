@@ -102,10 +102,11 @@ npm run start        # Run production server
 npm run lint         # Run ESLint
 
 # Testing
-npm test            # Run all tests
-npm run test:watch  # Watch mode
-npm run test:unit   # Unit tests only
-npm run test:e2e    # E2E tests
+npm test                  # Run all tests
+npm run test:watch        # Watch mode
+npm run test:unit         # Unit tests only
+npm run test:integration  # Integration tests only
+npm run test:e2e          # E2E tests
 ```
 
 ## Features in Detail
@@ -150,6 +151,7 @@ npm test
 
 # Lint code
 npm run lint
+```
 
 ## Testing
 
