@@ -12,7 +12,7 @@ jest.mock('recharts', () => ({
   PieChart: ({ children }) => <div data-testid="pie-chart">{children}</div>,
   Pie: ({ data }) => (
     <div data-testid="pie">
-      {data.map((item: any) => (
+      {data.map((item: MockData) => (
         <div key={item.name} data-testid="pie-slice">
           {`${item.name}: ${formatCurrency(item.value)}`}
         </div>
@@ -23,6 +23,12 @@ jest.mock('recharts', () => ({
   Tooltip: () => null,
   Legend: () => <div data-testid="chart-legend">Legend</div>,
 }))
+
+interface MockData {
+  name: string;
+  value: number;
+  color: string;
+}
 
 // Test data
 const mockPortfolio = {

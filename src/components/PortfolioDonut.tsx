@@ -1,8 +1,7 @@
 import { useState } from 'react';
-import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recharts';
+import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from 'recharts';
 import { Asset, Portfolio } from '@/types/api';
 import { Spinner } from '@/components/ui/spinner';
-import { CardSkeleton } from './skeletons/CardSkeleton';
 import { formatCurrency } from '@/lib/utils';
 
 type Props = {
